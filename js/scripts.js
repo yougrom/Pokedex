@@ -53,3 +53,15 @@ let pokemonList = [
     { name: 'Bellsprout', height: 0.7, types: ['grass', 'poison'] },
     { name: 'Tentacool', height: 0.9, types: ['water', 'poison'] }
 ];
+
+
+// I will use a for loop to iterate over the array and display the details of each pokemon.
+
+// Assuming there is an HTML element with the id "pokemonListContainer" to display the output
+let pokemonListContainer = document.getElementById("pokemonListContainer");
+
+for (let i = 0; i < pokemonList.length; i++) {
+  let pokemon = pokemonList[i];
+  let pokemonInfo = `${pokemon.name} (height: ${pokemon.height})<br>`;
+  document.write(pokemonInfo);
+}
