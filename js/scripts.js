@@ -1,7 +1,7 @@
 'use strict';
-// All pokemons have name, height and type.
-// I will create only adults pokemons, so I will not add age.
-let pokemonList = [
+
+const pokemonRepository = (function() {
+  const pokemonList = [
     { name: 'Venusaur', height: 2, types: ['grass', 'poison'] },
     { name: 'Charizard', height: 1.7, types: ['fire', 'flying'] },
     { name: 'Blastoise', height: 1.6, types: ['water'] },
@@ -28,7 +28,7 @@ let pokemonList = [
     { name: 'Primeape', height: 1, types: ['fighting'] },
     { name: 'Arcanine', height: 1.9, types: ['fire'] },
     { name: 'Poliwrath', height: 1.3, types: ['water', 'fighting'] },
-    { name: 'Alakazam', height: 1.5, types: ['psychic'] }, 
+    { name: 'Alakazam', height: 1.5, types: ['psychic'] },
     { name: 'Machamp', height: 1.6, types: ['fighting'] },
     { name: 'Victreebel', height: 1.7, types: ['grass', 'poison'] },
     { name: 'Tentacruel', height: 1.6, types: ['water', 'poison'] },
@@ -52,16 +52,36 @@ let pokemonList = [
     { name: 'Machop', height: 0.8, types: ['fighting'] },
     { name: 'Bellsprout', height: 0.7, types: ['grass', 'poison'] },
     { name: 'Tentacool', height: 0.9, types: ['water', 'poison'] }
-];
+  ];
 
+  function getAll() {
+    return  pokemonList.forEach(function(pokemon) {
+      let pokemonInfo = `${pokemon.name} (height: ${pokemon.height})`;
+      if (pokemon.height >= 2.0) pokemonInfo += " - Wow, that's big";
+      pokemonInfo += '<br>';
+      document.write(pokemonInfo);
+    });
+  }
 
-// I will use a for loop to iterate over the array and display the details of each pokemon.
+  function add(item) {
+    if (typeof item === 'object' && 'name' in item && 'height' in item && 'types' in item) {
+      pokemonList.push(item);
+    } else {
+      console.log('Error: Invalid input. Please provide an object with "name", "height", and "types" properties.');
+    }
+  }
 
-// Assuming there is an HTML element with the id "pokemonListContainer" to display the output
-let pokemonListContainer = document.getElementById("pokemonListContainer");
+  return {
+    getAll,
+    add,
+  };
+})();
 
-for (let i = 0; i < pokemonList.length; i++) {
-  let pokemon = pokemonList[i];
-  let pokemonInfo = `${pokemon.name} (height: ${pokemon.height})<br>`;
-  document.write(pokemonInfo);
-}
+const newPokemon = {
+  name: 'Pikachu', 
+  height: 0.4, 
+  types: ['electric']
+};
+
+pokemonRepository.add(newPokemon);
+pokemonRepository.getAll();
