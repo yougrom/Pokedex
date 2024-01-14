@@ -56,19 +56,10 @@ const pokemonRepository = (function() {
 
   function getAll() {
     return  pokemonList.forEach(function(pokemon) {
-      let pokemonCard = document.querySelector('.pokemon-list');
-      let listItem = document.createElement('li');
-      let button = document.createElement('button');
-      button.innerText = pokemon.name;
-      button.classList.add('main-button');
-      listItem.appendChild(button);
-      pokemonCard.appendChild(listItem);
-      
-
-
       let pokemonInfo = `${pokemon.name} (height: ${pokemon.height})`;
       if (pokemon.height >= 2.0) pokemonInfo += " - Wow, that's big";
       pokemonInfo += '<br>';
+      document.write(pokemonInfo);
     });
   }
 
