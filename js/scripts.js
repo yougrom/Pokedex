@@ -66,14 +66,34 @@ const pokemonRepository = (function() {
     }
   }
 
+  // Define the showDetails function in an accessible scope
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+
+  function addButtonEventListener(button, pokemon) {
+    button.addEventListener('click', function() {
+      showDetails(pokemon);
+    });
+  }
+
   function addListItem(pokemon) {
     let pokemonCard = document.querySelector('.pokemon-list');
     let listItem = document.createElement('li');
     let button = document.createElement('button');
     button.innerText = pokemon.name;
     button.classList.add('main-button');
-    pokemonCard.appendChild(listItem);
+
+    // Add event listener directly to the button
+    // button.addEventListener('click', function() {
+    //   showDetails(pokemon);
+    // });
+
     listItem.appendChild(button);
+    pokemonCard.appendChild(listItem);
+
+    // Call the new function to add the event listener
+    addButtonEventListener(button, pokemon);
   }
 
   return {
